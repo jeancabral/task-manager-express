@@ -20,11 +20,17 @@ var projects = [];
 var checkProjectExists = function (req, res, next) {
   const { id } = req.params
 
-  let _project = projects.filter((project) => {
-    return project.id === id;
-  })
+  // let _project = projects.filter((project) => {
+  //   return project.id === id;
+  // })
 
-  if (_project.length === 0) {
+  // if (_project.length === 0) {
+  //   return res.status(400).json({error: "Project not exists"})
+  // }
+
+  const _project = projects.find(p => p.id == id);
+
+  if (!_project) {
     return res.status(400).json({error: "Project not exists"})
   }
 
@@ -76,16 +82,20 @@ app.get('/projects', function(req, res) {
  * parâmetros da rota;
  */
 app.put('/projects/:id', checkProjectExists, function(req, res) {
-  const id = req.params.id;
+  const { id } = req.params;
   const { title } = req.body;
 
-  let _projects = projects.filter((project) => {
-    return project.id === id;
-  })
+  // let _projects = projects.filter((project) => {
+  //   return project.id === id;
+  // })
 
-  _projects[0].title = title
+  // _projects[0].title = title
 
-  res.send(projects);
+  const _projects = projects.find(p => p.id == id);
+
+  _projects.title = title;
+
+  return res.json(_projects);
 });
 
 /**
@@ -94,13 +104,19 @@ app.put('/projects/:id', checkProjectExists, function(req, res) {
 app.delete('/projects/:id', checkProjectExists, function(req, res) {
   const id = req.params.id;
 
-  let _projects = projects.filter((project) => {
-    return project.id != id;
-  })
+  // let _projects = projects.filter((project) => {
+  //   return project.id != id;
+  // })
 
-  projects = _projects
+  // projects = _projects
 
-  res.send(projects);
+  // res.send(projects);
+
+  const _projectIndex = projects.findIndex(p => p.id == id);
+
+  projects.splice(_projectIndex, 1);
+
+  return res.send();
 });
 
 /**
@@ -112,18 +128,23 @@ app.post('/projects/:id/tasks', checkProjectExists, function(req, res) {
   const id = req.params.id;
   const { title } = req.body;
 
-  let _projects = projects.filter((project) => {
-    return project.id === id;
-  })
+  // let _projects = projects.filter((project) => {
+  //   return project.id === id;
+  // })
 
-  _projects[0].tasks.push(title)
+  // _projects[0].tasks.push(title)
 
-  res.send(projects);
+
+  const _project = projects.find(p => p.id == id);
+
+  _project.tasks.push(title);
+
+  return res.json(_project);
 });
 
 
 
 //add a port listen
 app.listen(3000, function () {
-  console.log('🤖  Hello! the task manager app listening on port 3000!');
+  console.log('🤖  Hello! The task manager app is listening on port 3000!');
 });
