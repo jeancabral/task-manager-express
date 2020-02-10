@@ -3,6 +3,8 @@ const express = require('express');
 //create an express application 
 const app = express();
 
+const port = process.env.PORT | 5000;
+
 //enable json
 app.use(express.json());
 
@@ -116,6 +118,6 @@ app.post('/projects/:id/tasks', checkProjectExists, function(req, res) {
 
 
 //add a port listen
-app.listen(5000, function () {
-  console.log('🤖  Hello! The task manager app is listening on port 3000!');
+app.listen(port, function () {
+  console.log(`🤖  Hello! The task manager app is listening on port ${port}!`);
 });
