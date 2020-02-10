@@ -1,0 +1,27 @@
+{
+  "name": "task-manager-express",
+  "version": "1.0.0",
+  "description": "Aplicação para armazenar projetos e tarefas utilizando Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeancabral/task-manager-express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeancabral/task-manager-express/issues"
+  },
+  "homepage": "https://github.com/jeancabral/task-manager-express#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
