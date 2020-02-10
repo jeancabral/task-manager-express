@@ -13,11 +13,11 @@
   
 </p>
 
-### Demo
+### Demonstração
 
 [![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge&style=flat)](https://heroku-badge.herokuapp.com/projects.html)
 
-[Demo](https://projetct-task-manager-express.herokuapp.com)
+[Demo em https://projetct-task-manager-express.herokuapp.com](https://projetct-task-manager-express.herokuapp.com)
 
 ### Rotas
 

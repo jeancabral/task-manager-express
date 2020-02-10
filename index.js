@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
  */
 
 app.get('/', function (req, res) {
-  return res.send('Mais informações acesse: https://github.com/jeancabral/task-manager-express')
+  return res.send(`Mais informações acesse: <a href='https://github.com/jeancabral/task-manager-express'>https://github.com/jeancabral/task-manager-express</a>`)
 })
 
 app.post('/projects', function(req, res) {
