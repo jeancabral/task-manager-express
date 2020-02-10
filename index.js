@@ -3,7 +3,7 @@ const express = require('express');
 //create an express application 
 const app = express();
 
-const port = process.env.PORT | 5000;
+const port = process.env.PORT || 5000;
 
 //enable json
 app.use(express.json());
