@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
  * no formato string com aspas duplas.
  */
 
-app.post('/', function (req, res) {
+app.get('/', function (req, res) {
   return res.send('Mais informações acesse: https://github.com/jeancabral/task-manager-express')
 })
 
