@@ -6,30 +6,41 @@ const app = express();
 //enable json
 app.use(express.json());
 
-// projects
-var projects = [
-  {
-      "id": "1",
-      "title": "Novo projeto 1",
-      "tasks": [
-          "Nova tarefa do projeto 1"
-      ]
-  },
-  {
-      "id": "2",
-      "title": "Novo projeto 2",
-      "tasks": [
-          "Nova tarefa do projeto 2"
-      ]
-  },
-  {
-      "id": "3",
-      "title": "Novo projeto 3",
-      "tasks": [
-          "Nova tarefa do projeto 3"
-      ]
+// variables
+var projects = [];
+var request = 0;
+
+//middlewares
+
+/**
+ * Recebem o ID do projeto nos parâmetros da URL que verifica se o projeto 
+ * com aquele ID existe. Se não existir retorne um erro, caso contrário 
+ * permita a requisição continuar normalmente; 
+ */
+
+var checkProjectExists = function (req, res, next) {
+  const { id } = req.params
+
+  let _project = projects.filter((project) => {
+    return project.id === id;
+  })
+
+  if (_project.length === 0) {
+    return res.send({error: "Project not exists"})
   }
-];
+
+  next();
+}
+
+/**
+ * middleware global chamado em todas requisições que imprime (console.log) 
+ * uma contagem de quantas requisições foram feitas na aplicação até então;
+ */
+app.use(function (req, res, next) {
+  console.log('requests #', ++request);
+  next();
+});
+
 
 // routes
 
@@ -65,7 +76,7 @@ app.get('/projects', function(req, res) {
  * Alterar o título do projeto com o id presente nos 
  * parâmetros da rota;
  */
-app.put('/projects/:id', function(req, res) {
+app.put('/projects/:id', checkProjectExists, function(req, res) {
   const id = req.params.id;
   const { title } = req.body;
 
@@ -81,7 +92,7 @@ app.put('/projects/:id', function(req, res) {
 /**
  * Deleta o projeto com o id presente nos parâmetros da rota;
  */
-app.delete('/projects/:id', function(req, res) {
+app.delete('/projects/:id', checkProjectExists, function(req, res) {
   const id = req.params.id;
 
   let _projects = projects.filter((project) => {
@@ -98,7 +109,7 @@ app.delete('/projects/:id', function(req, res) {
  * de tarefas de um projeto específico escolhido através do id presente nos 
  * parâmetros da rota;
  */
-app.post('/projects/:id/tasks', function(req, res) {
+app.post('/projects/:id/tasks', checkProjectExists, function(req, res) {
   const id = req.params.id;
   const { title } = req.body;
 
