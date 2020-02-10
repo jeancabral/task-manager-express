@@ -30,6 +30,6 @@
 
 - Mddleware Global que dá log no número de requisições
 
-## :memo: Licença
+## Licença
 
 Esse projeto está sob a licença MIT.
