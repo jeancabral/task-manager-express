@@ -20,14 +20,6 @@ var projects = [];
 var checkProjectExists = function (req, res, next) {
   const { id } = req.params
 
-  // let _project = projects.filter((project) => {
-  //   return project.id === id;
-  // })
-
-  // if (_project.length === 0) {
-  //   return res.status(400).json({error: "Project not exists"})
-  // }
-
   const _project = projects.find(p => p.id == id);
 
   if (!_project) {
@@ -85,12 +77,6 @@ app.put('/projects/:id', checkProjectExists, function(req, res) {
   const { id } = req.params;
   const { title } = req.body;
 
-  // let _projects = projects.filter((project) => {
-  //   return project.id === id;
-  // })
-
-  // _projects[0].title = title
-
   const _projects = projects.find(p => p.id == id);
 
   _projects.title = title;
@@ -103,14 +89,6 @@ app.put('/projects/:id', checkProjectExists, function(req, res) {
  */
 app.delete('/projects/:id', checkProjectExists, function(req, res) {
   const id = req.params.id;
-
-  // let _projects = projects.filter((project) => {
-  //   return project.id != id;
-  // })
-
-  // projects = _projects
-
-  // res.send(projects);
 
   const _projectIndex = projects.findIndex(p => p.id == id);
 
@@ -127,13 +105,6 @@ app.delete('/projects/:id', checkProjectExists, function(req, res) {
 app.post('/projects/:id/tasks', checkProjectExists, function(req, res) {
   const id = req.params.id;
   const { title } = req.body;
-
-  // let _projects = projects.filter((project) => {
-  //   return project.id === id;
-  // })
-
-  // _projects[0].tasks.push(title)
-
 
   const _project = projects.find(p => p.id == id);
 
