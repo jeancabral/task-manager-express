@@ -7,8 +7,29 @@ const app = express();
 app.use(express.json());
 
 // projects
-var projects = [];
-
+var projects = [
+  {
+      "id": "1",
+      "title": "Novo projeto 1",
+      "tasks": [
+          "Nova tarefa do projeto 1"
+      ]
+  },
+  {
+      "id": "2",
+      "title": "Novo projeto 2",
+      "tasks": [
+          "Nova tarefa do projeto 2"
+      ]
+  },
+  {
+      "id": "3",
+      "title": "Novo projeto 3",
+      "tasks": [
+          "Nova tarefa do projeto 3"
+      ]
+  }
+];
 
 // routes
 
@@ -26,38 +47,68 @@ var projects = [];
  * no formato string com aspas duplas.
  */
 app.post('/projects', function(req, res) {
-  res.send('wip');
+  let {id, title} = req.body;
+
+  projects.push({id, title, tasks: []})
+
+  return res.json(projects);
 });
 
 /**
- * A rota deve deletar o projeto com o id presente nos parâmetros da rota;
+ * Lista todos projetos e suas tarefas;
  */
 app.get('/projects', function(req, res) {
-  res.send('wip');
+  return res.json(projects);
 });
 
 /**
- * A rota deve alterar apenas o título do projeto com o id presente nos 
+ * Alterar o título do projeto com o id presente nos 
  * parâmetros da rota;
  */
 app.put('/projects/:id', function(req, res) {
-  res.send('wip');
+  const id = req.params.id;
+  const { title } = req.body;
+
+  let _projects = projects.filter((project) => {
+    return project.id === id;
+  })
+
+  _projects[0].title = title
+
+  res.send(projects);
 });
 
 /**
- * A rota deve deletar o projeto com o id presente nos parâmetros da rota;
+ * Deleta o projeto com o id presente nos parâmetros da rota;
  */
 app.delete('/projects/:id', function(req, res) {
-  res.send('wip');
+  const id = req.params.id;
+
+  let _projects = projects.filter((project) => {
+    return project.id != id;
+  })
+
+  projects = _projects
+
+  res.send(projects);
 });
 
 /**
- * A rota deve receber um campo title e armazenar uma nova tarefa no array 
+ * Recebe um campo title e armazenar uma nova tarefa no array 
  * de tarefas de um projeto específico escolhido através do id presente nos 
  * parâmetros da rota;
  */
 app.post('/projects/:id/tasks', function(req, res) {
-  res.send('wip');
+  const id = req.params.id;
+  const { title } = req.body;
+
+  let _projects = projects.filter((project) => {
+    return project.id === id;
+  })
+
+  _projects[0].tasks.push(title)
+
+  res.send(projects);
 });
 
 
