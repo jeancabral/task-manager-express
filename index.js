@@ -56,6 +56,11 @@ app.use(function (req, res, next) {
  * Certifique-se de enviar tanto o ID quanto o título do projeto 
  * no formato string com aspas duplas.
  */
+
+app.post('/', function (req, res) {
+  return res.send('Mais informações acesse: https://github.com/jeancabral/task-manager-express')
+})
+
 app.post('/projects', function(req, res) {
   let {id, title} = req.body;
 
