@@ -8,7 +8,6 @@ app.use(express.json());
 
 // variables
 var projects = [];
-var request = 0;
 
 //middlewares
 
@@ -37,7 +36,7 @@ var checkProjectExists = function (req, res, next) {
  * uma contagem de quantas requisições foram feitas na aplicação até então;
  */
 app.use(function (req, res, next) {
-  console.log('requests #', ++request);
+  console.count("Número de requisições");
   next();
 });
 
