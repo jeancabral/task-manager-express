@@ -25,7 +25,7 @@ var checkProjectExists = function (req, res, next) {
   })
 
   if (_project.length === 0) {
-    return res.send({error: "Project not exists"})
+    return res.status(400).json({error: "Project not exists"})
   }
 
   next();
