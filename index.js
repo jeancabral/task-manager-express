@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require("cors");
+const { uuid } = require("uuidv4");
 
 //create an express application 
 const app = express();
@@ -7,6 +9,7 @@ const port = process.env.PORT || 5000;
 
 //enable json
 app.use(express.json());
+app.use(cors());
 
 // variables
 var projects = [];
@@ -62,9 +65,9 @@ app.get('/', function (req, res) {
 })
 
 app.post('/projects', function(req, res) {
-  let {id, title} = req.body;
+  let {title} = req.body;
 
-  projects.push({id, title, tasks: []})
+  projects.push({id: uuid(), title, tasks: []})
 
   return res.json(projects);
 });
